@@ -244,79 +244,9 @@ export const allFunkos = [
       },
     ],
   },
-  {
-    brand: "Funko The Office",
-    colors: [{ color: "#800080", color_name: "Púrpura" }],
-    created_at: new Date().toISOString(),
-    description: {
-      type: "doc",
-      content: [
-        {
-          type: "paragraph",
-          content: [
-            {
-              type: "text",
-              text: "Descripción de prueba del Funko número 8.",
-            },
-          ],
-        },
-      ],
-    },
-    features: ["Exclusivo de Comic-Con", "Alta demanda", "Coleccionable"],
-    id: "8a5d1e2be-5b60-4f3e-b8d1-a3c98c123abd",
-    images: ["https://ui.shadcn.com/placeholder.svg"],
-    name: "Funko Pop The Office 8",
-    price: 23.99,
-    slug: "funko-pop-the-office-8",
-    variants: [
-      {
-        color: "#800080",
-        color_name: "Púrpura",
-        id: "k2d3e4f5-fe26-4e08-9f1g-19a78ed45e14",
-        price: 23.99,
-        stock: 40,
-        storage: "XL",
-      },
-    ],
-  },
 ];
 
 export const recentCelulares = [
-  {
-    brand: "Funko Stranger Things",
-    colors: [{ color: "#00008B", color_name: "Azul Oscuro" }],
-    created_at: new Date().toISOString(),
-    description: {
-      type: "doc",
-      content: [
-        {
-          type: "paragraph",
-          content: [
-            {
-              type: "text",
-              text: "Descripción de prueba del Funko número 7.",
-            },
-          ],
-        },
-      ],
-    },
-    features: ["Edición limitada", "Exclusivo", "Detalles precisos"],
-    id: "7b3c2de7-3a10-4e9b-b8e7-b5c8a1234563",
-    images: ["https://ui.shadcn.com/placeholder.svg"],
-    name: "Funko Pop Stranger Things 7",
-    price: 19.99,
-    slug: "funko-pop-stranger-things-7",
-    variants: [
-      {
-        color: "#00008B",
-        color_name: "Azul Oscuro",
-        id: "d1f1a5b7-fe26-4e08-8b7e-16a45cd43f11",
-        price: 19.99,
-        stock: 45,
-        storage: "Large",
-      },
-    ],
-  },
   {
     brand: "Funko The Office",
     colors: [{ color: "#800080", color_name: "Púrpura" }],
