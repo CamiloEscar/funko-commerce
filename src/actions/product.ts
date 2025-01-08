@@ -91,3 +91,17 @@ export const getProductBySlug = async (slug: string) => {
 
   return data;
 };
+
+export const searchProducts = async (searchTerm: string) => {
+  const { data, error } = await supabase
+    .from("products")
+    .select("*, variants(*)")
+    .ilike('name', `%${searchTerm}%`); //busca productos cuyo nombre contenga el termino de busueda
+
+  if (error) {
+    console.log(error.message);
+    throw new Error(error.message);
+  }
+
+  return data;
+};
