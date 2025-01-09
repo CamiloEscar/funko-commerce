@@ -1,29 +1,59 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { RootLayout } from "../layouts/RootLayout";
-import { AboutPage, CellPhonesPage, HomePage } from "../pages";
+import {
+  AboutPage,
+  CellPhonesPage,
+  HomePage,
+  LoginPage,
+  OrdersUserPage,
+  RegisterPage,
+} from "../pages";
 import { CellPhonePage } from "../pages/CellPhonePage";
+import { ClientLayout } from "../layouts/ClientLayout";
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <RootLayout />,
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "celulares",
+        element: <CellPhonesPage />,
+      },
+      {
+        path: "celulares/:slug",
+        element: <CellPhonePage />,
+      },
+      {
+        path: "nosotros",
+        element: <AboutPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "registro",
+        element: <RegisterPage />,
+      },
+      {
+        path: "account",
+        element: <ClientLayout />,
         children: [
-            {
-                index: true,
-                element: <HomePage />
-            },
-            {
-                path: 'celulares',
-                element: <CellPhonesPage />
-            },
-            {
-                path: 'celulares/:slug',
-                element: <CellPhonePage />
-            },
-            {
-                path: 'nosotros',
-                element: <AboutPage />
-            },
-        ]
-    }
-])
+          {
+            path: "",
+            element: <Navigate to="/account/pedidos" />,
+          },
+          {
+            path: "pedidos",
+            element: <OrdersUserPage />,
+          },
+        ],
+      },
+    ],
+  },
+]);

@@ -1,19 +1,29 @@
 import { Link, NavLink } from "react-router-dom";
 import { navbarLinks } from "../../constants/links";
-import { HiOutlineSearch, HiOutlineShoppingBag } from "react-icons/hi";
+import {
+  HiOutlineSearch,
+  HiOutlineShoppingBag,
+  HiOutlineUser,
+} from "react-icons/hi";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { Logo } from "./Logo";
-import { useCartStore} from "../../store/cart.store";
+import { useCartStore } from "../../store/cart.store";
 import { useGlobalStore } from "../../store/global.store";
+import { useUser } from "../../hooks";
+import { LuLoader } from "react-icons/lu";
 
 export const Navbar = () => {
   const openSheet = useGlobalStore((state) => state.openSheet);
 
-  const totalItemsInCart = useCartStore(state => state.totalItemsInCart)
+  const totalItemsInCart = useCartStore((state) => state.totalItemsInCart);
 
   const setActiveNavMobile = useGlobalStore(
     (state) => state.setActiveNavMobile
   );
+
+  const { session, isLoading } = useUser();
+
+  const userId = session?.user.id;
 
   return (
     <header className="bg-white text-black py-4 flex items-center justify-between px-5 border-b border-slate-200 lg:px-12">
@@ -40,15 +50,23 @@ export const Navbar = () => {
           <HiOutlineSearch size={25} />
         </button>
 
-        <div className="relative">
-          {/* User-nav */}
-          <Link
-            to="/account"
-            className="border-2 border-slate-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold"
-          >
-            R
+        {isLoading ? (
+          <LuLoader className="animate-spin" size={60} />
+        ) : session ? (
+          <div className="relative">
+            {/* User-nav */}
+            <Link
+              to="/account"
+              className="border-2 border-slate-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold"
+            >
+              R
+            </Link>
+          </div>
+        ) : (
+          <Link to="/login">
+            <HiOutlineUser size={25} />
           </Link>
-        </div>
+        )}
 
         <button className="relative" onClick={() => openSheet("cart")}>
           <span className="absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full">
