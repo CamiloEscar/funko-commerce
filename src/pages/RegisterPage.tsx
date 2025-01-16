@@ -1,21 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
-import { z } from "zod";
 import { useRegister, useUser } from "../hooks";
 import { LuLoader } from "react-icons/lu";
 import { Loader } from "../components/shared/Loader";
+import { UserRegisterFormValues, userRegisterSchema } from "../lib/validators";
 
 //usamos zod que es un esquema de validacion de formularios como el registro
 
-export const userRegisterSchema = z.object({
-  email: z.string().email("El correo no es valido"),
-  password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
-  fullName: z.string().min(1, "El nombre completo es requerido"),
-  phone: z.string().optional(),
-});
 
-export type UserRegisterFormValues = z.infer<typeof userRegisterSchema>;
 export const RegisterPage = () => {
   const {
     register,

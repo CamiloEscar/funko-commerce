@@ -7,8 +7,11 @@ import {
   LoginPage,
   OrdersUserPage,
   RegisterPage,
+  CheckoutPage,
+  CellPhonePage,
+  Gracias,
+  OrderUserPage
 } from "../pages";
-import { CellPhonePage } from "../pages/CellPhonePage";
 import { ClientLayout } from "../layouts/ClientLayout";
 
 export const router = createBrowserRouter([
@@ -56,4 +59,16 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/checkout',
+    element: <CheckoutPage />
+  },
+  {
+    path: '/checkout/:id/gracias',
+    element: <Gracias />
+  },
+  {
+    path: 'pedidos/:id',
+    element: <OrderUserPage />
+  }
 ]);
