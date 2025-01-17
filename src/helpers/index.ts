@@ -46,3 +46,30 @@ export const prepareProducts = (products: Product[]) => {
     };
   });
 };
+
+//funcion para formatear la fecha a formato dia de mes de año
+export const formatDateLong = (date: string): string => {
+  const dateObject = new Date(date);
+
+  return dateObject.toLocaleDateString('es-AR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+//FUNCION PARA OBTENER EL ESTADO DEL PEDIDO EN ESPAÑOL
+export const getStatus = (status: string): string => {
+  switch (status) {
+    case 'pending':
+      return 'Pendiente';
+    case 'Paid':
+      return 'Pagado';
+    case 'Shipped':
+      return 'Enviado';
+    case'Delivered':
+      return 'Entregado';
+    default:
+      return 'Desconocido';
+  }
+}

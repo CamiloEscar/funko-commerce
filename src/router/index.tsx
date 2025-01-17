@@ -10,7 +10,7 @@ import {
   CheckoutPage,
   CellPhonePage,
   Gracias,
-  OrderUserPage
+  OrderUserPage,
 } from "../pages";
 import { ClientLayout } from "../layouts/ClientLayout";
 
@@ -55,20 +55,21 @@ export const router = createBrowserRouter([
             path: "pedidos",
             element: <OrdersUserPage />,
           },
+
+          {
+            path: "pedidos/:id",
+            element: <OrderUserPage />,
+          },
         ],
       },
     ],
   },
   {
-    path: '/checkout',
-    element: <CheckoutPage />
+    path: "/checkout",
+    element: <CheckoutPage />,
   },
   {
-    path: '/checkout/:id/gracias',
-    element: <Gracias />
+    path: "/checkout/:id/gracias",
+    element: <Gracias />,
   },
-  {
-    path: 'pedidos/:id',
-    element: <OrderUserPage />
-  }
 ]);
