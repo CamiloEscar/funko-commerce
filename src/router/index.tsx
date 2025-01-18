@@ -11,8 +11,10 @@ import {
   CellPhonePage,
   Gracias,
   OrderUserPage,
+  DashboardProductPage
 } from "../pages";
 import { ClientLayout } from "../layouts/ClientLayout";
+import { DashboardLayout } from '../layouts/DashboardLayout';
 
 export const router = createBrowserRouter([
   {
@@ -71,5 +73,16 @@ export const router = createBrowserRouter([
   {
     path: "/checkout/:id/gracias",
     element: <Gracias />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      { index: true, element: <Navigate to="/dashboard/productos" /> },
+      {
+        path: "productos",
+        element: <DashboardProductPage />,
+      },
+    ],
   },
 ]);

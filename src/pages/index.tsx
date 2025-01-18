@@ -10,3 +10,8 @@ export * from './OrdersUserPage'
 export * from './CheckoutPage'
 export * from './Agradecimiento'
 export * from './OrderUserPage'
+
+/******************************************** */
+/*                 PAGINAS DASHBOARD          */
+/******************************************** */
+export * from './dashboard/DashboardProductPage'
