@@ -11,7 +11,8 @@ import {
   CellPhonePage,
   Gracias,
   OrderUserPage,
-  DashboardProductPage
+  DashboardProductPage,
+  DashboardNewProductPage
 } from "../pages";
 import { ClientLayout } from "../layouts/ClientLayout";
 import { DashboardLayout } from '../layouts/DashboardLayout';
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
       {
         path: "productos",
         element: <DashboardProductPage />,
+      },
+      {
+        path: "productos/nuevo",
+        element: <DashboardNewProductPage />,
       },
     ],
   },

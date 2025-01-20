@@ -6,7 +6,7 @@ export const DashboardProductPage = () => {
   return (
     <div className="h-full flex flex-col gap-2">
       <Link
-        to="/dashboard/productos/new"
+        to="/dashboard/productos/nuevo"
         className="bg-black text-white flex items-center self-end py-[6px] px-2 rounded-md text-sm gap-1 font-semibold"
       >
         <IoAddCircleOutline className="inline-block" />

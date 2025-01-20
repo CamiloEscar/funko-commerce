@@ -15,3 +15,4 @@ export * from './OrderUserPage'
 /*                 PAGINAS DASHBOARD          */
 /******************************************** */
 export * from './dashboard/DashboardProductPage'
+export * from './dashboard/DashboardNewProductPage'
