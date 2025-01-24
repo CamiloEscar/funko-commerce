@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ProductFormValues, productSchema } from "../../../lib/validators";
 import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionFormProduct } from "./SectionFormProduct";
 import { InputForm } from "./InputForm";
 import { FeaturesInput } from "./FeaturesInput";
@@ -11,12 +11,13 @@ import { generateSlug } from "../../../helpers";
 import { VariantsInput } from "./VariantsInput";
 import { UploaderImages } from "./UploaderImages";
 import { Editor } from "./Editor";
+import { useCreateProduct, useProduct, useUpdateProduct } from "../../../hooks";
+import { Loader } from "../../shared/Loader";
 
 interface Props {
   titleForm: string;
 }
 export const FormProduct = ({ titleForm }: Props) => {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,8 +28,66 @@ export const FormProduct = ({ titleForm }: Props) => {
   } = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
   });
+
+  const { slug } = useParams<{ slug: string }>();
+  const { product, isLoading } = useProduct(slug || "");
+
+  const { mutate: createProduct, isPending } = useCreateProduct();
+
+  const { mutate: updateProduct, isPending: isUpdatePending } =
+    useUpdateProduct(product?.id || "");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (product && !isLoading) {
+      setValue("name", product.name);
+      setValue("slug", product.slug);
+      setValue("brand", product.brand);
+      setValue(
+        "features",
+        product.features.map((feature) => ({ value: feature }))
+      );
+      setValue("description", product.description);
+      setValue(
+        "variants",
+        product.variants.map((v) => ({
+          id: v.id,
+          stock: v.stock,
+          price: v.price,
+          storage: v.storage,
+          color: v.color,
+          colorName: v.color_name,
+        }))
+      );
+      setValue("images", product.images);
+    }
+  }, [product, isLoading, setValue]);
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    const features = data.features.map((feature) => feature.value);
+
+    if (slug) {
+      updateProduct({
+        name: data.name,
+        brand: data.brand,
+        slug: data.slug,
+        variants: data.variants,
+        images: data.images,
+        description: data.description,
+        features,
+      });
+    } else {
+      createProduct({
+        name: data.name,
+        brand: data.brand,
+        slug: data.slug,
+        variants: data.variants,
+        images: data.images,
+        description: data.description,
+        features,
+      });
+    }
   });
 
   const watchName = watch("name");
@@ -39,6 +98,8 @@ export const FormProduct = ({ titleForm }: Props) => {
     const generatedSlug = generateSlug(watchName);
     setValue("slug", generatedSlug, { shouldValidate: true });
   }, [watchName, setValue]);
+
+  if (isPending || isUpdatePending || isLoading) return <Loader />;
 
   return (
     <div className="flex flex-col gap-6 relative">
@@ -107,16 +168,18 @@ export const FormProduct = ({ titleForm }: Props) => {
           />
         </SectionFormProduct>
         <SectionFormProduct titleSection="Imagenes del producto">
-          <UploaderImages 
-          errors={errors}
-          setValue={setValue}
-          watch={watch}/>
+          <UploaderImages errors={errors} setValue={setValue} watch={watch} />
         </SectionFormProduct>
 
-        <SectionFormProduct titleSection="Descripcion del producto" className="col-span-full">
-          <Editor 
-          setValue={setValue}
-          errors={errors}/>
+        <SectionFormProduct
+          titleSection="Descripcion del producto"
+          className="col-span-full"
+        >
+          <Editor
+            setValue={setValue}
+            errors={errors}
+            initialContent={product?.description}
+          />
         </SectionFormProduct>
 
         <div className="flex gap-3 absolute top-0 right-0">

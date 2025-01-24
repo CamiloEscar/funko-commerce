@@ -5,7 +5,10 @@
 export * from "./products/useProducts";
 export * from "./products/useFilteredProducts";
 export * from "./products/useHomeProducts";
-
+export * from "./products/useCreateProducts";
+export * from "./products/useProduct";
+export * from "./products/useDeleteProduct";
+export * from "./products/useUpdatedProduct";
 /****************************** */
 /*       AUTH            */
 /***************************** */
@@ -13,7 +16,7 @@ export * from "./products/useHomeProducts";
 export * from "./auth/useLogin";
 export * from "./auth/useRegister";
 export * from "./auth/useUser";
-export * from "./auth/useCustomer"
+export * from "./auth/useCustomer";
 
 /****************************** */
 /*       ORDERS            */
