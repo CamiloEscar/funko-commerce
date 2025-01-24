@@ -101,7 +101,7 @@ export const CardProducts = ({
         </div>
       </div>
 
-      <div className="absolute top-2 left-2">
+      <div className="bg-black text-white absolute top-2 left-2 px-2 rounded-md">
         {stock === 0 && <span>Agotado</span>}
       </div>
     </div>

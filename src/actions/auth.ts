@@ -112,3 +112,18 @@ export const getUserData = async (userId: string) => {
 
   return data;
 };
+
+export const getUserRole = async (userId: string) => {
+  const { data, error } = await supabase
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", userId)
+    .single();
+
+  if (error) {
+    console.log(error);
+    throw new Error("error al obtener el rol del usuario");
+  }
+
+  return data.role
+};
