@@ -271,7 +271,7 @@ export const updateProduct = async (
 
   const folderName = productId;
 
-  const validImages = productInput.images.filter((image) => image);
+  const validImages = productInput.images.filter((image) => image) as [File | string];
 
   //3.1 identificar las imagenes que han sido eliminadas
   const imagesToDelete = existingImages.filter(

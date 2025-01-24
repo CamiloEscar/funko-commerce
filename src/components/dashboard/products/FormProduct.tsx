@@ -13,6 +13,7 @@ import { UploaderImages } from "./UploaderImages";
 import { Editor } from "./Editor";
 import { useCreateProduct, useProduct, useUpdateProduct } from "../../../hooks";
 import { Loader } from "../../shared/Loader";
+import { JSONContent } from "@tiptap/react";
 
 interface Props {
   titleForm: string;
@@ -48,7 +49,7 @@ export const FormProduct = ({ titleForm }: Props) => {
         "features",
         product.features.map((feature) => ({ value: feature }))
       );
-      setValue("description", product.description);
+      setValue("description", product.description as JSONContent);
       setValue(
         "variants",
         product.variants.map((v) => ({
@@ -178,7 +179,7 @@ export const FormProduct = ({ titleForm }: Props) => {
           <Editor
             setValue={setValue}
             errors={errors}
-            initialContent={product?.description}
+            initialContent={product?.description as JSONContent}
           />
         </SectionFormProduct>
 
